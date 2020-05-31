@@ -87,7 +87,7 @@ open class TabbarViewController: UIViewController {
     
     private func draw() {
         self.drawTabbarItemView()
-        if UIDevice.current.orientation.isLandscape {
+        if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
             self.setConstraintTabbarItemLeftView()
         } else {
             self.setConstraintTabbarItemBottomView()
@@ -100,15 +100,17 @@ open class TabbarViewController: UIViewController {
         constraintMenuView += self.tabbarView.visual.format("H:|-8-[v0]-0-|",for: [menuView]).contraints
         constraintMenuView += self.tabbarView.visual.format("V:|-(>=0)-[v0]-(>=0)-|",for: [menuView]).contraints
         constraintMenuView += self.menuView.visual.center([.vertical]).contraints
+        UIView.animate(withDuration: 0.0) { self.tabbarView.layoutIfNeeded() }
     }
     
     private func setconstraintMenuViewInBottom() {
         self.tabbarView.removeConstraints(constraintMenuView)
-        constraintMenuView += self.menuView.visual.center([.horizontal]).contraints
-        constraintMenuView += self.tabbarView.visual.format("H:|-(>=0)-[v0]-(>=0)-|",for: [menuView]).contraints
+        constraintMenuView += self.tabbarView.visual.format("H:|-(>=0)-[v0(>=0)]-(>=0)-|",for: [menuView]).contraints
         constraintMenuView += self.tabbarView.visual.format("V:|-4-[v0(>=h)]",
             metrics: ["h": self.tabbarHeight - 8],
             for: [menuView]).contraints
+        constraintMenuView += self.menuView.visual.center([.horizontal]).contraints
+        UIView.animate(withDuration: 0.0) { self.tabbarView.layoutIfNeeded() }
     }
     
     private func setConstraintTabbarItemBottomView() {
@@ -283,7 +285,7 @@ open class TabbarViewController: UIViewController {
                 
         menuPanView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.dragView)))
         print("loadView:", self.view.bounds)
-        if UIDevice.current.orientation.isLandscape {
+        if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
             print("loadView isLandscape")
             addConstraintMenuViewLeftState()
             setconstraintMenuViewInLeft()
@@ -378,7 +380,7 @@ open class TabbarViewController: UIViewController {
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         print("viewWillTransition:", self.view.bounds)
-        if UIDevice.current.orientation.isLandscape {
+        if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
             print("isLandscape")
             addConstraintMenuViewLeftState()
             setConstraintTabbarItemLeftView()
