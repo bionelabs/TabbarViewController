@@ -11,46 +11,49 @@ import TabbarViewController
 
 class ViewController: TabbarViewController {
     
-    let ViewControllerA = MenuViewController()
-    let ViewControllerB = MenuViewController()
-    let ViewControllerC = MenuViewController()
-    let ViewControllerD = MenuViewController()
-    let ViewControllerE = MenuViewController()
+    let viewControllerA = MenuViewController()
+    let viewControllerB = MenuViewController()
+    let viewControllerC = MenuViewController()
+    let viewControllerD = MenuViewController()
+    let viewControllerE = MenuViewController()
     
     override func loadView() {
         super.loadView()
         
-        ViewControllerA.tabBarItem = UITabBarItem(
+        viewControllerA.tabBarItem = UITabBarItem(
             title: "Home",
             image: UIImage(named:"home"),
             selectedImage: nil)
-        ViewControllerB.tabBarItem = UITabBarItem(
+        viewControllerB.tabBarItem = UITabBarItem(
             title: "Media",
             image: UIImage(named:"backup-media"),
             selectedImage: nil)
-        ViewControllerC.tabBarItem = UITabBarItem(
+        viewControllerC.tabBarItem = UITabBarItem(
             title: "Reminder",
             image: UIImage(named:"reminder"),
             selectedImage: nil)
-        ViewControllerD.tabBarItem = UITabBarItem(
+        viewControllerD.tabBarItem = UITabBarItem(
             title: "Setting",
             image: UIImage(named:"tabbar-setting"),
             selectedImage: nil)
-        ViewControllerE.tabBarItem = UITabBarItem(
+        viewControllerE.tabBarItem = UITabBarItem(
             title: "Podcast",
             image: UIImage(named:"tabbar-setting"),
             selectedImage: nil)
         
-        ViewControllerA.view.backgroundColor = UIColor("F6F9FE")
-        ViewControllerB.view.backgroundColor = UIColor("b1cbf6")
-        ViewControllerC.view.backgroundColor = UIColor("c8daf9")
-        ViewControllerD.view.backgroundColor = UIColor("dfeafb")
-        ViewControllerE.view.backgroundColor = UIColor("ffffff")
+        viewControllerA.view.backgroundColor = UIColor("F6F9FE")
+        viewControllerB.view.backgroundColor = UIColor("b1cbf6")
+        viewControllerC.view.backgroundColor = UIColor("c8daf9")
+        viewControllerD.view.backgroundColor = UIColor("dfeafb")
+        viewControllerE.view.backgroundColor = UIColor("ffffff")
         
-        self.viewControllers = [ViewControllerA,
-                                ViewControllerB,
-                                ViewControllerC,
-                                ViewControllerD]
+        
+        let nvA = UINavigationController(rootViewController: viewControllerA)
+        
+        self.viewControllers = [nvA,
+                                viewControllerB,
+                                viewControllerC,
+                                viewControllerD]
         
     }
     

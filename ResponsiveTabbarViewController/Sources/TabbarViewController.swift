@@ -23,12 +23,7 @@ open class TabbarViewController: UIViewController {
         }
     }
     
-    var selectedViewController: UIViewController? {
-        get {
-            return self.viewControllers.filter { $0.view == self.contentView }.first
-        }
-        set {}
-    }
+    var selectedViewController: UIViewController?
     
     public var tabbarItemSelectedColor: UIColor = UIColor.white.alpha(0.15)
     public var tabbarItemUnSelectedColor: UIColor = .clear
@@ -66,8 +61,8 @@ open class TabbarViewController: UIViewController {
     
     private var contentView: UIView = {
         let view = UIView()
+        view.backgroundColor = .red
         view.layer.masksToBounds = true
-        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -238,6 +233,7 @@ open class TabbarViewController: UIViewController {
             self.contentView.subviews.forEach {
                 $0.removeFromSuperview()
             }
+            self.selectedViewController = controllers.first
             self.contentView.addSubview(viewVC)
             viewVC.visual.anchor([.horizontal, .vertical], padding: 0)
         }
@@ -260,6 +256,7 @@ open class TabbarViewController: UIViewController {
             tabBarItemView.tabBarItem == $0.tabBarItem
         }
         guard let viewVC = controllers.first?.view else { return }
+        self.selectedViewController = controllers.first
         self.contentView.subviews.forEach {
             $0.removeFromSuperview()
         }

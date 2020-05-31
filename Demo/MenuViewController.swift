@@ -19,14 +19,22 @@ class MenuViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        self.view.backgroundColor = .white
         self.view.addSubview(button)
         button.addTarget(self, action: #selector(tap), for: .touchUpInside)
+        title = "onebuffer"
     }
     
     @objc func tap() {
-        let vc = ListViewController()
-        vc.modalPresentationStyle = .automatic
-        self.present(vc, animated: true, completion: nil)
+
+        if let navigationController = self.navigationController {
+            let vc = MenuViewController()
+            navigationController.pushViewController(vc, animated: true)
+        } else {
+            let vc = ListViewController()
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 
     override func viewDidLoad() {
