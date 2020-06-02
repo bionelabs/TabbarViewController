@@ -104,6 +104,9 @@ class TabBarItemView: View {
             self.textLabel.isHidden = false
             self.addOnlyImageTextPortraitConstraint()
         }
+        UIView.animate(withDuration: 0.0) {
+            self.layoutIfNeeded()
+        }
     }
     
     override func layoutSubviews() {

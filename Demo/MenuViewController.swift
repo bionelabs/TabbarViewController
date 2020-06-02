@@ -22,7 +22,6 @@ class MenuViewController: UIViewController {
         self.view.backgroundColor = .white
         self.view.addSubview(button)
         button.addTarget(self, action: #selector(tap), for: .touchUpInside)
-        title = "onebuffer"
     }
     
     @objc func tap() {

@@ -374,21 +374,46 @@ open class TabbarViewController: UIViewController {
         }
     }
     
-    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        print("viewWillTransition:", self.view.bounds)
-        if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
-            print("isLandscape")
-            addConstraintMenuViewLeftState()
-            setConstraintTabbarItemLeftView()
-            setconstraintMenuViewInLeft()
-        } else {
-            print("isPortrait")
-            addConstraintMenuViewBottomState()
-            setConstraintTabbarItemBottomView()
-            setconstraintMenuViewInBottom()
-        }
+    // Solution detect rotate: https://stackoverflow.com/a/60577486/3619521
+    override open func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+
+        coordinator.animate(alongsideTransition: { (context) in
+            guard let windowInterfaceOrientation = self.windowInterfaceOrientation else { return }
+
+            if windowInterfaceOrientation.isLandscape {
+                            print("isLandscape", UIDevice.current.orientation.isLandscape)
+                self.addConstraintMenuViewLeftState()
+                self.setConstraintTabbarItemLeftView()
+                self.setconstraintMenuViewInLeft()
+            } else {
+                         print("isPortrait", UIDevice.current.orientation.isLandscape)
+                   self.addConstraintMenuViewBottomState()
+                   self.setConstraintTabbarItemBottomView()
+                   self.setconstraintMenuViewInBottom()
+            }
+        })
     }
+
+    private var windowInterfaceOrientation: UIInterfaceOrientation? {
+        return UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
+    }
+    
+//    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//        print("viewWillTransition:", self.view.bounds)
+//        if size.width > self.view.frame.size.width {
+//            print("isLandscape", UIDevice.current.orientation.isLandscape)
+//            addConstraintMenuViewLeftState()
+//            setConstraintTabbarItemLeftView()
+//            setconstraintMenuViewInLeft()
+//        } else {
+//            print("isPortrait", UIDevice.current.orientation.isLandscape)
+//            addConstraintMenuViewBottomState()
+//            setConstraintTabbarItemBottomView()
+//            setconstraintMenuViewInBottom()
+//        }
+//    }
     
     open override func viewDidLoad() {
         super.viewDidLoad()
