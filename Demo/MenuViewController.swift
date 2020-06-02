@@ -25,7 +25,6 @@ class MenuViewController: UIViewController {
     }
     
     @objc func tap() {
-
         if let navigationController = self.navigationController {
             let vc = MenuViewController()
             navigationController.pushViewController(vc, animated: true)

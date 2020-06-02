@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05276DC52485E92300B20954 /* UIViewController+TabbarViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05276DC42485E92300B20954 /* UIViewController+TabbarViewcontroller.swift */; };
 		05A47E192480A09200F66551 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A47E182480A09200F66551 /* UIColor.swift */; };
 		05A47E1B2480A39F00F66551 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A47E1A2480A39F00F66551 /* UIColor.swift */; };
 		05C7792F247EBC9C00AEC8B9 /* ResponsiveTabbarViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 05C7792D247EBC9C00AEC8B9 /* ResponsiveTabbarViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		05276DC42485E92300B20954 /* UIViewController+TabbarViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+TabbarViewcontroller.swift"; sourceTree = "<group>"; };
 		05A47E182480A09200F66551 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		05A47E1A2480A39F00F66551 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		05C7792A247EBC9C00AEC8B9 /* TabbarViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TabbarViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +142,7 @@
 				05A47E182480A09200F66551 /* UIColor.swift */,
 				05C779592480115E00AEC8B9 /* TabBarItemView.swift */,
 				05DFC4EB2482B8B8003395BE /* View.swift */,
+				05276DC42485E92300B20954 /* UIViewController+TabbarViewcontroller.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				05DFC4EC2482B8B9003395BE /* View.swift in Sources */,
 				05C77952247EBD1D00AEC8B9 /* Layout.swift in Sources */,
 				05C7795A2480115E00AEC8B9 /* TabBarItemView.swift in Sources */,
+				05276DC52485E92300B20954 /* UIViewController+TabbarViewcontroller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

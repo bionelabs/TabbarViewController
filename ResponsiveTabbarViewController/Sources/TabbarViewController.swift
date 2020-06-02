@@ -102,8 +102,8 @@ open class TabbarViewController: UIViewController {
         self.tabbarView.removeConstraints(constraintMenuView)
         constraintMenuView += self.tabbarView.visual.format("H:|-(>=0)-[v0(>=0)]-(>=0)-|",for: [menuView]).contraints
         constraintMenuView += self.tabbarView.visual.format("V:|-4-[v0(>=h)]",
-            metrics: ["h": self.tabbarHeight - 8],
-            for: [menuView]).contraints
+                                                            metrics: ["h": self.tabbarHeight - 8],
+                                                            for: [menuView]).contraints
         constraintMenuView += self.menuView.visual.center([.horizontal]).contraints
         UIView.animate(withDuration: 0.0) { self.tabbarView.layoutIfNeeded() }
     }
@@ -279,7 +279,7 @@ open class TabbarViewController: UIViewController {
         self.view.addSubview(menuPanView)
         self.view.addSubview(contentView)
         self.tabbarView.addSubview(menuView)
-                
+        
         menuPanView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.dragView)))
         print("loadView:", self.view.bounds)
         if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
@@ -375,26 +375,26 @@ open class TabbarViewController: UIViewController {
     }
     
     // Solution detect rotate: https://stackoverflow.com/a/60577486/3619521
-    override open func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        print("willTransition:", coordinator)
         coordinator.animate(alongsideTransition: { (context) in
             guard let windowInterfaceOrientation = self.windowInterfaceOrientation else { return }
-
+            
             if windowInterfaceOrientation.isLandscape {
-                            print("isLandscape", UIDevice.current.orientation.isLandscape)
+                print("isLandscape", UIDevice.current.orientation.isLandscape)
                 self.addConstraintMenuViewLeftState()
                 self.setConstraintTabbarItemLeftView()
                 self.setconstraintMenuViewInLeft()
             } else {
-                         print("isPortrait", UIDevice.current.orientation.isLandscape)
-                   self.addConstraintMenuViewBottomState()
-                   self.setConstraintTabbarItemBottomView()
-                   self.setconstraintMenuViewInBottom()
+                print("isPortrait", UIDevice.current.orientation.isLandscape)
+                self.addConstraintMenuViewBottomState()
+                self.setConstraintTabbarItemBottomView()
+                self.setconstraintMenuViewInBottom()
             }
         })
     }
-
+    
     private var windowInterfaceOrientation: UIInterfaceOrientation? {
         return UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
     }
