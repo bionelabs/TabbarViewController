@@ -90,7 +90,7 @@ class TabBarItemView: View {
     
     private func setupAnyConstraints() {
         if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
-            print("bounds:", self.bounds, UIScreen.main.bounds)
+            // print("bounds:", self.bounds, UIScreen.main.bounds)
             if self.bounds.width <= self.bounds.height + 20 {
                 self.textLabel.isHidden = true
                 self.addOnlyImageConstraint()

@@ -399,22 +399,6 @@ open class TabbarViewController: UIViewController {
         return UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
     }
     
-//    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//        print("viewWillTransition:", self.view.bounds)
-//        if size.width > self.view.frame.size.width {
-//            print("isLandscape", UIDevice.current.orientation.isLandscape)
-//            addConstraintMenuViewLeftState()
-//            setConstraintTabbarItemLeftView()
-//            setconstraintMenuViewInLeft()
-//        } else {
-//            print("isPortrait", UIDevice.current.orientation.isLandscape)
-//            addConstraintMenuViewBottomState()
-//            setConstraintTabbarItemBottomView()
-//            setconstraintMenuViewInBottom()
-//        }
-//    }
-    
     open override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
