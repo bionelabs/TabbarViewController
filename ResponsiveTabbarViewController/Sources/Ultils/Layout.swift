@@ -8,21 +8,21 @@
 
 import UIKit
 
-public extension UIView {
+internal extension UIView {
     
     class Visual {
         
-        public enum Size: Int {
+        internal enum Size: Int {
             case width
             case height
         }
         
-        public enum Align: Int {
+        internal enum Align: Int {
             case horizontal
             case vertical
         }
         
-        public enum Edge: Int {
+        internal enum Edge: Int {
             
             case horizontal
             case vertical
@@ -35,7 +35,7 @@ public extension UIView {
         
         private let superview: UIView?
         private let _view: UIView
-        public var contraints: [NSLayoutConstraint] = []
+        internal var contraints: [NSLayoutConstraint] = []
         
         init(_ view: UIView) {
             self._view = view
@@ -43,7 +43,7 @@ public extension UIView {
             self.superview = view.superview
         }
         
-        @discardableResult public func center(_ atributes: [UIView.Visual.Align]) -> Visual {
+        @discardableResult internal func center(_ atributes: [UIView.Visual.Align]) -> Visual {
             guard let superview = self.superview else { return self }
             var _constraints: [NSLayoutConstraint] = []
             
@@ -73,7 +73,7 @@ public extension UIView {
             return self
         }
         
-        @discardableResult public func stack(_ atribute: UIView.Visual.Align, for views: [UIView], spacing: CGFloat = 8) -> Visual {
+        @discardableResult internal func stack(_ atribute: UIView.Visual.Align, for views: [UIView], spacing: CGFloat = 8) -> Visual {
             switch atribute {
             case .horizontal:
                 if views.count == 0 { return self }
@@ -114,7 +114,7 @@ public extension UIView {
             }
         }
         
-        @discardableResult public func anchor(_ atributes: [UIView.Visual.Edge], padding: CGFloat = 8) -> Visual {
+        @discardableResult internal func anchor(_ atributes: [UIView.Visual.Edge], padding: CGFloat = 8) -> Visual {
             guard let superview = self.superview else { return self }
             var _constraints: [NSLayoutConstraint] = []
             atributes.forEach { (atribute) in
@@ -183,7 +183,7 @@ public extension UIView {
             return self
         }
         
-        @discardableResult public func format(_ format: String, metrics: [String: CGFloat] = [:], for views: [UIView]) -> Visual {
+        @discardableResult internal func format(_ format: String, metrics: [String: CGFloat] = [:], for views: [UIView]) -> Visual {
             var inViews: [String: UIView] = [:]
             for (index, item) in views.enumerated() {
                 inViews["v\(index)"] = item
@@ -194,7 +194,7 @@ public extension UIView {
             return self
         }
         
-        @discardableResult public func equal(_ attribute: UIView.Visual.Size, fromView: UIView, toView: UIView ) -> Visual {
+        @discardableResult internal func equal(_ attribute: UIView.Visual.Size, fromView: UIView, toView: UIView ) -> Visual {
             switch attribute {
             case .height:
                 let constraint = NSLayoutConstraint(item: fromView, attribute: .width, relatedBy: .equal, toItem: toView, attribute: .width, multiplier: 1.0, constant: 0.0)
@@ -209,7 +209,7 @@ public extension UIView {
             }
         }
         
-        @discardableResult public func equal(_ attribute: UIView.Visual.Size, views: [UIView]) -> Visual {
+        @discardableResult internal func equal(_ attribute: UIView.Visual.Size, views: [UIView]) -> Visual {
             switch attribute {
             case .height:
                 for (index, view) in views.enumerated() {
@@ -240,7 +240,7 @@ public extension UIView {
             }
         }
         
-        public func square(_ attribute: UIView.Visual.Size, constant: CGFloat? = nil) {
+        internal func square(_ attribute: UIView.Visual.Size, constant: CGFloat? = nil) {
             switch attribute {
             case .height:
                 if let constant = constant {
@@ -279,7 +279,7 @@ public extension UIView {
             }
         }
         
-        @discardableResult public func size(_ atributes: [UIView.Visual.Size], constant: CGFloat) -> Visual {
+        @discardableResult internal func size(_ atributes: [UIView.Visual.Size], constant: CGFloat) -> Visual {
             guard let superview = self.superview else { return self }
             var _constraints: [NSLayoutConstraint] = []
             atributes.forEach { (atribute) in
@@ -307,7 +307,7 @@ public extension UIView {
 extension UIView {
     
     @discardableResult
-    public func stack(_ views: UIView...) -> UIView {
+    internal func stack(_ views: UIView...) -> UIView {
         let contentView = UIView()
         self.addSubview(contentView)
         views.forEach {
@@ -328,13 +328,13 @@ extension UIView {
     }
     
     @discardableResult
-    public func padding(edges: [UIView.Visual.Edge] = [.leading, .trailing, .bottom, .top], length: CGFloat? = nil) -> UIView {
+    internal func padding(edges: [UIView.Visual.Edge] = [.leading, .trailing, .bottom, .top], length: CGFloat? = nil) -> UIView {
         self.visual.anchor(edges, padding: length ?? 8)
         return self
     }
     
     @discardableResult
-    public func padding(length: CGFloat) -> UIView {
+    internal func padding(length: CGFloat) -> UIView {
         self.visual.anchor([.leading, .trailing, .bottom, .top], padding: length)
         return self
     }
@@ -345,21 +345,21 @@ extension UIView {
 extension UIView {
     
     @discardableResult
-    public func frame(width: CGFloat) -> UIView {
+    internal func frame(width: CGFloat) -> UIView {
         self.visual.size([.width], constant: width)
         return self
         
     }
     
     @discardableResult
-    public func frame(height: CGFloat) -> UIView {
+    internal func frame(height: CGFloat) -> UIView {
         self.visual.size([.height], constant: height)
         return self
         
     }
     
     @discardableResult
-    public func frame(width: CGFloat, height: CGFloat) -> UIView {
+    internal func frame(width: CGFloat, height: CGFloat) -> UIView {
         self.visual.size([.width], constant: width)
         self.visual.size([.height], constant: height)
         return self

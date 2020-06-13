@@ -8,13 +8,13 @@
 
 import UIKit
 
-open class View: UIView {
+internal class View: UIView {
     
-    open func setupViews() { }
+    internal func setupViews() { }
 
-    open func setupComponents() { }
+    internal func setupComponents() { }
     
-    open func setupConstraints() { }
+    internal func setupConstraints() { }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,7 +28,7 @@ open class View: UIView {
         super.init(coder: aDecoder)
     }
     
-    override open func draw(_ rect: CGRect) {
+    override internal func draw(_ rect: CGRect) {
         super.draw(rect)
     }
     

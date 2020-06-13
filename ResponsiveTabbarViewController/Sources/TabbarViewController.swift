@@ -17,7 +17,7 @@ open class TabbarViewController: UIViewController {
     public weak var dataSource: TabbarViewControllerDataSource?
     
     // MARK: Public properties
-    public var tabbarHeight: CGFloat = 60  {
+    public var tabbarHeight: CGFloat = 64  {
         didSet{
             self.tabbarItemHeightConstraint?.constant = self.tabbarHeight
         }
@@ -267,7 +267,11 @@ open class TabbarViewController: UIViewController {
     // MARK: Life circle
     
     open override func viewSafeAreaInsetsDidChange() {
-        super.viewSafeAreaInsetsDidChange()
+        if #available(iOS 11.0, *) {
+            super.viewSafeAreaInsetsDidChange()
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     override open func loadView() {
@@ -378,23 +382,27 @@ open class TabbarViewController: UIViewController {
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         print("willTransition:", coordinator)
-        coordinator.animate(alongsideTransition: { (context) in
-            guard let windowInterfaceOrientation = self.windowInterfaceOrientation else { return }
-            
-            if windowInterfaceOrientation.isLandscape {
-                print("isLandscape", UIDevice.current.orientation.isLandscape)
-                self.addConstraintMenuViewLeftState()
-                self.setConstraintTabbarItemLeftView()
-                self.setconstraintMenuViewInLeft()
-            } else {
-                print("isPortrait", UIDevice.current.orientation.isLandscape)
-                self.addConstraintMenuViewBottomState()
-                self.setConstraintTabbarItemBottomView()
-                self.setconstraintMenuViewInBottom()
-            }
-        })
+        if #available(iOS 13.0, *) {
+            coordinator.animate(alongsideTransition: { (context) in
+                guard self.windowInterfaceOrientation != nil else { return }
+                if self.windowInterfaceOrientation!.isLandscape  {
+                    print("isLandscape", UIDevice.current.orientation.isLandscape)
+                    self.addConstraintMenuViewLeftState()
+                    self.setConstraintTabbarItemLeftView()
+                    self.setconstraintMenuViewInLeft()
+                } else {
+                    print("isPortrait", UIDevice.current.orientation.isLandscape)
+                    self.addConstraintMenuViewBottomState()
+                    self.setConstraintTabbarItemBottomView()
+                    self.setconstraintMenuViewInBottom()
+                }
+            })
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
+    @available(iOS 13.0, *)
     private var windowInterfaceOrientation: UIInterfaceOrientation? {
         return UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
     }

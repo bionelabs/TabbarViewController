@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabBarItemView: View {
+internal class TabBarItemView: View {
     
     enum ContentState {
         case icon
